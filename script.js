@@ -9,38 +9,32 @@ const Gameboard = (function () {
 //our players are also going to be stored in objects,
 
 function Player(name, marker) {
-  this.name = name;
-  this.marker = marker;
-
   const getName = () => name;
   const getMarker = () => marker;
   return { getName, getMarker };
 }
-
 // an object to control the flow of the game itself.
 
 const GameBrain = {};
 
 //Object to manage the dom (duh!)
 const DomManager = (() => {
-  let gameboardEl = document.getElementsByClassName("gameboard");
+  let gameboardEl = document.getElementsByClassName("gameboard")[0];
 
-  const getGameBoardEl = () => gameboardEl[0]; // Adjusting to select the first gameboard element
-
-  const drawBoard = (tiles, board) => {
+  const drawBoard = (tiles) => {
     let boardContent = "";
 
-    for (let i = 0; i < tiles.length; i++) {  // Fixed loop condition
+    for (let i = 0; i < tiles.length; i++) {  
       boardContent += `<div class="tile" id="tile${i}"> ${
-        tiles[i] ? tiles[i] : " "
+         tiles[i] || " "
       } </div>`;
     };
 
-    board.innerHTML = boardContent;
+    gameboardEl.innerHTML = boardContent;
   };
 
-  return { drawBoard, getGameBoardEl };
+  return { drawBoard };
 })();
 
 //testing
-DomManager.drawBoard(Gameboard.getTiles(), DomManager.getGameBoardEl());
+DomManager.drawBoard(Gameboard.getTiles());
