@@ -30,4 +30,11 @@ body{
     border: 1px solid #000;
     padding: 20px;
     
+    
+}
+.tile:not(.marked){
+    cursor: pointer;
+}
+.tile.marked{
+    cursor: not-allowed;
 }
