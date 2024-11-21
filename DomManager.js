@@ -8,6 +8,11 @@ const addTileEventListeners = (onTileClick) => {
   });
 };
 
+const changeTitle = (phrase)=>{
+  const title = document.getElementsByTagName('h1')[0];
+  title.innerText = phrase;
+ 
+}
 
 const drawBoard = (tiles) => {
   let boardContent = "";
@@ -25,6 +30,7 @@ const renderMark = (el, mark) => {
 // Define the DomManager object
 const DomManager = {
   drawBoard,
+  changeTitle,
   renderMark,
   addTileEventListeners,
 };

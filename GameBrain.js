@@ -39,6 +39,7 @@ export const GameBrain = {
     // Get current player
     const currentPlayer = this.players[this.currentPlayerIndex];
     const marker = currentPlayer.getMarker();
+   
 
     // Place marker on the gameboard if valid
     if (Gameboard.setTile(index, marker)) {
@@ -53,11 +54,13 @@ export const GameBrain = {
 
       // Switch to the next player
       this.currentPlayerIndex = (this.currentPlayerIndex + 1) % this.players.length;
+      DomManager.changeTitle(this.players[this.currentPlayerIndex].getName())
     }
   },
 
   playGame(playerNames = ['Player 1', 'Player 2']) {
     // Initialize players
+    DomManager.changeTitle(playerNames[0]) 
     this.players = [
       Player(playerNames[0], 'X'),
       Player(playerNames[1], 'O')
