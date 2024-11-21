@@ -12,7 +12,7 @@ export const GameBrain = {
     [6, 7, 8],
     [0, 3, 6], // Columns
     [1, 4, 7],
-    [2, 5, 8],
+    [2, 5, 8],    
     [0, 4, 8], // Diagonals
     [2, 4, 6],
   ],
@@ -24,6 +24,13 @@ export const GameBrain = {
         return true; // Winner found
       }
     }
+     // Check for a tie (if all tiles are filled and no winner)
+     //const tiles = Gameboard.getTiles();
+     if (tiles.every(tile => tile)) { // Check if all tiles are non-empty
+         console.log("It's a tie!");
+         this.isGameOver = true;
+         return;
+     }
     return false; // No winner
   },
 

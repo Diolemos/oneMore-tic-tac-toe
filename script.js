@@ -1,4 +1,4 @@
 import { GameBrain } from './GameBrain.js';
 
-// Start the game
-GameBrain.playGame(['Alice', 'Bob']); 
+
+GameBrain.playGame(['Player 1', 'Player 2']); 

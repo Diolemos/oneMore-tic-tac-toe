@@ -10,6 +10,7 @@
         tiles[index] = marker;
         return true;  
       }
+      console.log("Please, chose an empty spot")
       return false;   // Return false if the move was invalid
     };
   
