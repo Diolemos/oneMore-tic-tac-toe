@@ -21,21 +21,28 @@ export const GameBrain = {
     for (let combination of this.winningCombinations) {
       const [a, b, c] = combination;
       if (tiles[a] && tiles[a] === tiles[b] && tiles[a] === tiles[c]) {
-        return true; // Winner found
+      
+        return true; 
       }
     }
-     // Check for a tie (if all tiles are filled and no winner)
-     //const tiles = Gameboard.getTiles();
-     if (tiles.every(tile => tile)) { // Check if all tiles are non-empty
-         console.log("It's a tie!");
-         this.isGameOver = true;
-         return;
-     }
+    
     return false; // No winner
   },
-
+checkForTie(tiles){
+    // Check for a tie (if all tiles are filled and no winner)
+     //const tiles = Gameboard.getTiles();
+     if (tiles.every(tile => tile)) { // Check if all tiles are non-empty
+        
+      console.log("it's a tie")
+      this.isGameOver = true;
+      return true;
+  }
+  return false;
+},
   
   onTileClick(index) {
+    if( this.isGameOver)return
+     
     // Get current player
     const currentPlayer = this.players[this.currentPlayerIndex];
     const marker = currentPlayer.getMarker();
@@ -45,15 +52,22 @@ export const GameBrain = {
     if (Gameboard.setTile(index, marker)) {
       DomManager.renderMark(document.getElementById(`tile${index}`), marker);
 
+      if(this.checkForTie(Gameboard.getTiles())){
+        DomManager.changeTitle("Tie!")
+        this.isGameOver = true;
+        return;
+      }
+
       // Check if there's a winner
       if (this.checkWinner(Gameboard.getTiles())) {
-        console.log(`${currentPlayer.getName()} wins!`);
+        DomManager.changeTitle(`${this.players[this.currentPlayerIndex].getName()} Wins!`)
         this.isGameOver = true;
         return;
       }
 
       // Switch to the next player
       this.currentPlayerIndex = (this.currentPlayerIndex + 1) % this.players.length;
+      //update title to indicate who should play next
       DomManager.changeTitle(this.players[this.currentPlayerIndex].getName())
     }
   },
