@@ -1,6 +1,17 @@
 // Reference to the gameboard element
-const gameboardEl = document.getElementsByClassName("gameboard")[0];
+let gameboardEl ;
 
+const createGameboardElement = () => {
+  if (gameboardEl) {
+    console.log("There is already a gameboard!");
+    return;
+  }
+
+  // Create the gameboard element dynamically
+  gameboardEl = document.createElement("div");
+  gameboardEl.className = "gameboard";
+  document.body.appendChild(gameboardEl); 
+};
 
 const addTileEventListeners = (onTileClick) => {
   document.querySelectorAll('.tile').forEach((tile, index) => {
@@ -29,6 +40,7 @@ const renderMark = (el, mark) => {
 
 // Define the DomManager object
 const DomManager = {
+  createGameboardElement,
   drawBoard,
   changeTitle,
   renderMark,

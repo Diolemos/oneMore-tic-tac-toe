@@ -73,6 +73,9 @@ checkForTie(tiles){
   },
 
   playGame(playerNames = ['Player 1', 'Player 2']) {
+    //create the gameboard
+    DomManager.createGameboardElement();
+    
     // Initialize players
     DomManager.changeTitle(playerNames[0]) 
     this.players = [
