@@ -1,6 +1,15 @@
 // Reference to the gameboard element
 let gameboardEl ;
 
+
+const createPlayButton = ()=>{
+  let playButton = document.createElement("button");
+  playButton.className = "play_button";
+  playButton.textContent = "Play"
+  return playButton;
+
+}
+
 const createGameboardElement = () => {
   if (gameboardEl) {
     console.log("There is already a gameboard!");
@@ -40,6 +49,7 @@ const renderMark = (el, mark) => {
 
 // Define the DomManager object
 const DomManager = {
+  createPlayButton,
   createGameboardElement,
   drawBoard,
   changeTitle,
